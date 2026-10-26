@@ -17,6 +17,10 @@ module Rack
     
     def call(env)
       if matched_rule = find_first_matching_rule(env)
+        puts "Found a match"
+        puts "From: #{matched_rule.from}"
+        puts "To: #{matched_rule.to}"
+
         rack_response = matched_rule.apply!(env)
         # Don't invoke the app if applying the rule returns a rack response
         return rack_response unless rack_response === true
